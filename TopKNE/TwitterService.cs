@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace TopKNE
@@ -11,6 +12,7 @@ namespace TopKNE
     {
         private readonly HttpClient _httpClient;
         private readonly string _remoteServiceBaseUrl = "https://api.twitter.com/2/";
+        private readonly string _bearerToken = "";
 
      
 
@@ -23,6 +25,9 @@ namespace TopKNE
         {
             _httpClient.BaseAddress = new Uri(_remoteServiceBaseUrl);
             List<string> tweets = new List<string>();
+
+            _httpClient.DefaultRequestHeaders.Authorization
+                         = new AuthenticationHeaderValue("Bearer", _bearerToken);
 
             var response = _httpClient.GetAsync(String.Format("/users/{0}/tweets", uid)).Result;
             if (response.IsSuccessStatusCode)
