@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace TopKNE
 {
-    public interface ITokenizer
+    interface ITokenizeMany
     {
-        public List<string> DoOperation(string input);
+        List<List<string>> TokenizeMany(List<string> inputs, ITokenizer tok);
     }
 }
