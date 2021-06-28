@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace TopKNE
 {
-    public interface ITopK
+    interface ITopKAdapter
     {
-        List<Token> DoOperation(List<string> input, int k);
+        List<Token> DoOperation(List<List<string>> input, int k);
     }
 }
