@@ -21,7 +21,7 @@ namespace TopKNE
             List<List<string>> output = new List<List<string>>();
             foreach (var t in inputs)
             {
-                output.Add(tok.DoOperation(t));
+                output.Add(tok.DoOperation(t.ToLower()));
             }
 
             return output;

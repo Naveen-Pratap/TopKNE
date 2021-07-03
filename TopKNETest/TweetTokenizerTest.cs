@@ -17,8 +17,8 @@ namespace TopKNETest
 
             List<List<string>> expected = new List<List<string>>
                 {
-                    new List<string>{ "Hello", "my", "name", "is", "Eren" },
-                    new List<string>{ "Nice", "to", "meet", "you" }
+                    new List<string>{ "hello", "my", "name", "is", "eren" },
+                    new List<string>{ "nice", "to", "meet", "you" }
                 };
             List<List<string>> res = tt.TokenizeMany(tweets, tok);
             expected.Should().BeEquivalentTo(res);

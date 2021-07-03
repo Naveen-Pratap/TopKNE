@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TopKNE
 {
-    interface ITwitterService
+    public interface ITwitterService
     {
         List<string> GetTweets(string uid);
         //string getUIDOfUser(string username);

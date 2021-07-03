@@ -12,5 +12,10 @@ namespace TopKNE
             List<string> tokens = input.Trim().Split(' ').ToList();
             return tokens;
         }
+
+        public SimpleTokenizer()
+        {
+
+        }
     }
 }
