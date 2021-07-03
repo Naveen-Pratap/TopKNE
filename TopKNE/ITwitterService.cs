@@ -8,8 +8,7 @@ namespace TopKNE
     public interface ITwitterService
     {
         List<string> GetTweets(string uid);
-        //string getUIDOfUser(string username);
 
-        //List<Token> getTopK(string username, int k);
+        List<Token> GetTopK(string username, int k);
     }
 }

@@ -1,6 +1,4 @@
-﻿using edu.stanford.nlp.process;
-using java.rmi.server;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,25 +22,26 @@ namespace TopKNE
     public class TwitterService: ITwitterService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _remoteServiceBaseUrl = "https://api.twitter.com/2/";
-        private readonly string _bearerToken = "";
+        private readonly string _remoteServiceBaseUrl = "https://api.twitter.com/2";
+        private readonly string _bearerToken = "AAAAAAAAAAAAAAAAAAAAAA8cQwEAAAAAV6Orzry3wRsb5IT6Vo6IEtDtMwQ%3D5B3jsYr2gDP8etgqzhmIfFEjeK10LegODqOFe4e2rAdeGN1PQu";
 
      
 
         public TwitterService(HttpClient httpClient)
             {
                 _httpClient = httpClient;
-            }
+                _httpClient.BaseAddress = new Uri(_remoteServiceBaseUrl);
+        }
 
         public List<string> GetTweets(string uid)
         {
-            _httpClient.BaseAddress = new Uri(_remoteServiceBaseUrl);
+            //_httpClient.BaseAddress = new Uri(_remoteServiceBaseUrl);
             List<string> tweets = new List<string>();
 
             _httpClient.DefaultRequestHeaders.Authorization
                          = new AuthenticationHeaderValue("Bearer", _bearerToken);
 
-            var response = _httpClient.GetAsync(String.Format($"/users/{uid}/tweets")).Result;
+            var response = _httpClient.GetAsync(String.Format($"/2/users/{uid}/tweets")).Result;
             if (response.IsSuccessStatusCode)
             {
                 string temp = response.Content.ReadAsStringAsync().Result;
@@ -64,13 +63,13 @@ namespace TopKNE
 
         public string GetUserId(string username)
         {
-            _httpClient.BaseAddress = new Uri(_remoteServiceBaseUrl);
+            //_httpClient.BaseAddress = new Uri(_remoteServiceBaseUrl);
           
 
             _httpClient.DefaultRequestHeaders.Authorization
                          = new AuthenticationHeaderValue("Bearer", _bearerToken);
 
-            var response = _httpClient.GetAsync(String.Format($"/users/by/username/{username}/tweets")).Result;
+            var response = _httpClient.GetAsync(String.Format($"/2/users/by/username/{username}")).Result;
             if (response.IsSuccessStatusCode)
             {
                 string temp = response.Content.ReadAsStringAsync().Result;

@@ -8,33 +8,32 @@ using Microsoft.Extensions.Logging;
 namespace TopKNE.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("topk")]
     public class TopKFromTweetsController : ControllerBase
     {
 
         private readonly ILogger<TopKFromTweetsController> _logger;
         private readonly ITwitterService _service;
 
-        public TopKFromTweetsController(ITwitterService service)
+        public TopKFromTweetsController(ITwitterService service, ILogger<TopKFromTweetsController> logger)
         {
             _service = service;
-        }
-        public TopKFromTweetsController(ILogger<TopKFromTweetsController> logger)
-        {
             _logger = logger;
         }
 
-        //[HttpGet]
-        //public IEnumerable<WeatherForecast> Get()
-        //{
-        //    var rng = new Random();
-        //    return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        //    {
-        //        Date = DateTime.Now.AddDays(index),
-        //        TemperatureC = rng.Next(-20, 55),
-        //        Summary = Summaries[rng.Next(Summaries.Length)]
-        //    })
-        //    .ToArray();
-        //}
+
+        [HttpGet]
+        public ResponseModel Get([FromQuery(Name = "username")] string username, [FromQuery(Name = "k")] int k = 1)
+        {
+            var tokens = _service.GetTopK(username, k);
+            ResponseModel _objResponseModel = new ResponseModel
+            {
+                Data = tokens,
+                Status = true,
+                Message = "Request successfull"
+            };
+
+            return _objResponseModel;
+        }
     }
 }

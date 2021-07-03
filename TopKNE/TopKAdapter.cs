@@ -7,7 +7,7 @@ namespace TopKNE
 {
     public class TopKAdapter: ITopKAdapter
     {
-        private ITopK topK;
+        private readonly ITopK topK;
 
         public TopKAdapter(ITopK topK)
         {
